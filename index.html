@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Document</title>
+    <link rel="stylesheet" href="./dist/style/main.css">
+</head>
+<body>
+    <div id="app">
+        <h1>
+            {{product}}
+        </h1>
+        <p>
+            {{description}}
+        </p>
+        <a :href="href" :title="description">
+            <img :src="image" :alt="product">
+        </a>
+        <span class="onSale" v-show="onSale">on Sale!</span>
+    </div>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="./dist/js/main.js"></script>
+</body>
+</html>

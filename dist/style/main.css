@@ -1,0 +1,15 @@
+body {
+    background-color: #c2fdc2;
+}
+img {
+    width: 200px;
+    display: block;
+}
+.onsale {
+    display: inline-block;
+    background-color: #287728;
+    color: #fff;
+    margin: 8px;
+    padding: 2px 4px;
+    border: 1px solid #adadad;
+}
