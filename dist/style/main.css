@@ -5,7 +5,7 @@ img {
     width: 200px;
     display: block;
 }
-.onsale {
+.inStock {
     display: inline-block;
     background-color: #287728;
     color: #fff;

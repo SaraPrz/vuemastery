@@ -8,7 +8,7 @@
 <body>
     <div id="app">
         <h1>
-            {{product}}
+            {{title}} 
         </h1>
         <p>
             {{description}}
@@ -16,7 +16,7 @@
         <a :href="href" :title="description">
             <img :src="image" :alt="product">
         </a>
-        <span class="onSale" v-show="onSale">on Sale!</span>
+        <!-- <span class="inStock" v-show="inStock">on Sale!</span> -->
         <p>
             sizes:
         </p>
@@ -26,7 +26,7 @@
             </li>
         </ul>
         <!-- event handling -->
-        <button v-on:click="addItem" class="add" :disabled="!onSale" :class="{disabledButton : !onSale}">
+        <button v-on:click="addItem" class="add" :disabled="!inStock" :class="{disabledButton : !inStock}">
             add to cart
         </button>
         <button v-on:click="removeItem" class="remove">
@@ -36,10 +36,13 @@
             items: {{cart}}
         </div>
         <!-- style binding -->
-        <div class="color-box" v-for="variant in variants" :style="{backgroundColor: variant.variantColor}" @mouseover="updateProduct(variant.variantImg)">
+        <div class="color-box" v-for="(variant , index) in variants" :style="{backgroundColor: variant.variantColor}" @mouseover="updateProduct(index)">
         </div>
-        <p  :class="{outOfStock: !onSale}">
+        <p  :class="{outOfStock: !inStock}">
             Out of Stock
+        </p>
+        <p>
+            {{forSale}}
         </p>
     </div>
     <!-- <div id="app2">
