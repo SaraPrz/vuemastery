@@ -25,7 +25,8 @@
                 {{size}}
             </li>
         </ul>
-        <button v-on:click="addItem" class="add">
+        <!-- event handling -->
+        <button v-on:click="addItem" class="add" :disabled="!onSale" :class="{disabledButton : !onSale}">
             add to cart
         </button>
         <button v-on:click="removeItem" class="remove">
@@ -34,6 +35,12 @@
         <div class="cart">
             items: {{cart}}
         </div>
+        <!-- style binding -->
+        <div class="color-box" v-for="variant in variants" :style="{backgroundColor: variant.variantColor}" @mouseover="updateProduct(variant.variantImg)">
+        </div>
+        <p  :class="{outOfStock: !onSale}">
+            Out of Stock
+        </p>
     </div>
     <!-- <div id="app2">
         {{message}}

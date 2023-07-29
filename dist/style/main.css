@@ -25,6 +25,14 @@ img {
     color: #fff;
     border: none;
 }
-.cart {
-
+.color-box {
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+}
+.disabledButton {
+    background-color: #a3a1a1;
+}
+.outOfStock {
+    text-decoration: line-through;
 }

@@ -23,11 +23,14 @@ var app = new Vue({
     },
     methods: {
         addItem() {
-            this.cart += 1
+        this.cart += 1;
         },
         removeItem() {
-            this.cart -= 1
-        }
+        this.cart -= 1;
+        },
+        updateProduct(variantImg) {
+        this.image = variantImg;
+        },
     },
 });
 
