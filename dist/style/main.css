@@ -13,3 +13,18 @@ img {
     padding: 2px 4px;
     border: 1px solid #adadad;
 }
+.add {
+    background-color: #1f6bf8;
+    padding: 4px 8px;
+    color: #fff;
+    border: none;
+}
+.remove {
+    background-color: #b90a0a;
+    padding: 4px 8px;
+    color: #fff;
+    border: none;
+}
+.cart {
+
+}

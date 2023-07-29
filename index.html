@@ -17,7 +17,28 @@
             <img :src="image" :alt="product">
         </a>
         <span class="onSale" v-show="onSale">on Sale!</span>
+        <p>
+            sizes:
+        </p>
+        <ul>
+            <li v-for="size in sizes">
+                {{size}}
+            </li>
+        </ul>
+        <button v-on:click="addItem" class="add">
+            add to cart
+        </button>
+        <button v-on:click="removeItem" class="remove">
+            remove from cart
+        </button>
+        <div class="cart">
+            items: {{cart}}
+        </div>
     </div>
+    <!-- <div id="app2">
+        {{message}}
+    </div> -->
+
     <script src="node_modules/vue/dist/vue.js"></script>
     <script src="./dist/js/main.js"></script>
 </body>
