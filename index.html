@@ -3,53 +3,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue Document</title>
-    <link rel="stylesheet" href="./dist/style/main.css">
+    <link rel="stylesheet" href="./main.css">
 </head>
 <body>
     <div id="app">
-        <h1>
-            {{title}} 
-        </h1>
-        <p>
-            {{description}}
-        </p>
-        <a :href="href" :title="description">
-            <img :src="image" :alt="product">
-        </a>
-        <!-- <span class="inStock" v-show="inStock">on Sale!</span> -->
-        <p>
-            sizes:
-        </p>
-        <ul>
-            <li v-for="size in sizes">
-                {{size}}
-            </li>
-        </ul>
-        <!-- event handling -->
-        <button v-on:click="addItem" class="add" :disabled="!inStock" :class="{disabledButton : !inStock}">
-            add to cart
-        </button>
-        <button v-on:click="removeItem" class="remove">
-            remove from cart
-        </button>
-        <div class="cart">
-            items: {{cart}}
-        </div>
-        <!-- style binding -->
-        <div class="color-box" v-for="(variant , index) in variants" :style="{backgroundColor: variant.variantColor}" @mouseover="updateProduct(index)">
-        </div>
-        <p  :class="{outOfStock: !inStock}">
-            Out of Stock
-        </p>
-        <p>
-            {{forSale}}
-        </p>
+        <product :premium="premium"></product>
+        <product-details :details="details"></product-details>
     </div>
     <!-- <div id="app2">
         {{message}}
     </div> -->
 
     <script src="node_modules/vue/dist/vue.js"></script>
-    <script src="./dist/js/main.js"></script>
+    <script src="./main.js"></script>
 </body>
 </html>
