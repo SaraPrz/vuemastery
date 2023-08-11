@@ -7,8 +7,11 @@
 </head>
 <body>
     <div id="app">
-        <product :premium="premium"></product>
-        <product-details :details="details"></product-details>
+        <div class="cart">
+            cart: {{cart.length}}
+        </div>
+        <product :premium="premium" @add-to-cart="updateCart" @remove-from-cart="removeFromCart"></product>
+        <product-details :details="details" ></product-details>
     </div>
     <!-- <div id="app2">
         {{message}}

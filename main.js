@@ -32,9 +32,6 @@ Vue.component("product", {
       <button v-on:click="removeItem" class="remove">
           remove from cart
       </button>
-      <div class="cart">
-          items: {{cart}}
-      </div>
       <!-- style binding -->
       <div class="color-box" v-for="(variant , index) in variants" :style="{backgroundColor: variant.variantColor}" @mouseover="updateProduct(index)">
       </div>
@@ -61,7 +58,7 @@ Vue.component("product", {
           variantId: 2234,
           variantColor: "green",
           variantImg: "./assets/socks.png",
-          variantQuantity: 0,
+          variantQuantity: 3,
         },
         {
           variantId: 2235,
@@ -70,15 +67,14 @@ Vue.component("product", {
           variantQuantity: 10,
         },
       ],
-      cart: 0,
     };
   },
   methods: {
     addItem() {
-      this.cart += 1;
+      this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
     },
     removeItem() {
-      this.cart -= 1;
+      this.$emit('remove-from-cart' , this.variants[this.selectedVariant].variantId);
     },
     updateProduct(index) {
       this.selectedVariant = index;
@@ -123,11 +119,25 @@ Vue.component("product-details", {
   </h3>
   </div>`
 });
+
 var app = new Vue({
   el: "#app", 
   data: {
     premium: true,
-    details: 'this is the details of product'
+    details: 'this is the details of product',
+      cart: [],
+  },
+  methods: {
+    updateCart(id) {
+      this.cart.push(id)
+    },
+    removeFromCart(id) {
+      console.log(this.cart.indexOf(id));
+      selectedVal = this.cart.indexOf(id)
+      if (this.cart.length >=0 && selectedVal >=0) {
+        this.cart.splice(selectedVal ,1)
+      }
+    }
   }
 });
 
