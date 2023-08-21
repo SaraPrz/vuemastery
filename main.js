@@ -42,7 +42,28 @@ Vue.component("product", {
           {{forSale}}
       </p>
       <p>shipping: {{shipping}}</p>
+      <hr/>
+      <div>
+        <h2>Reviews</h2>
+        <p v-if="!reviews.length">There are no reviews yet.</p>
+        <ul>
+          <li v-for="review in reviews">
+            <p>
+              {{review.name}}
+            </p>
+            <p>
+              {{review.review}}
+            </p>
+            <p>
+              rating:
+              {{review.rating}}
+            </p>
+          </li>
+        </ul>
+      </div>
+      <product-review @review-submitted="addReview"></product-review>
     </div>
+
     `,
   data() {
     return {
@@ -67,6 +88,7 @@ Vue.component("product", {
           variantQuantity: 10,
         },
       ],
+      reviews: []
     };
   },
   methods: {
@@ -79,6 +101,9 @@ Vue.component("product", {
     updateProduct(index) {
       this.selectedVariant = index;
     },
+    addReview(productReview) {
+      this.reviews.push(productReview)
+    }
   },
   computed: {
     title() {
@@ -105,6 +130,7 @@ Vue.component("product", {
     }
   },
 });
+
 Vue.component("product-details", {
   props: {
     details: {
@@ -119,6 +145,85 @@ Vue.component("product-details", {
   </h3>
   </div>`
 });
+
+Vue.component('product-review' , {
+  template: `
+    <form class="review-form" @submit.prevent="onSubmit">
+      <p v-if="errors.length">
+        <b>Please correct the following error(s):</b>
+          <ul>
+            <li v-for="error in errors">{{ error }}</li>
+          </ul>
+      </p>
+      <p>
+        <label for="name">Name:</label>
+        <input id="name" v-model="name" placeholder="name">
+      </p>
+      
+      <p>
+        <label for="review">Review:</label>      
+        <textarea id="review" v-model="review" ></textarea>
+      </p>
+      
+      <p>
+        <label for="rating">Rating:</label>
+        <select id="rating" v-model.number="rating">
+          <option>5</option>
+          <option>4</option>
+          <option>3</option>
+          <option>2</option>
+          <option>1</option>
+        </select>
+      </p>
+      <p>
+      Would you recommend this product?
+      <br>
+      <input type="radio" id="no" v-model="recommend" :value="false">
+      <label for="no">No</label><br>
+      <input type="radio" id="yes" v-model="recommend" :value="true">
+      <label for="yes">Yes</label><br>
+      
+      </p>
+      <p>
+        <input type="submit" value="Submit">  
+      </p>    
+    
+    </form>
+  `,
+  data() {
+    return {
+      name: null,
+      review: null,
+      rating: null,
+      recommend: null,
+      errors: []
+    }
+  },
+  methods: {
+    onSubmit() {
+      if (this.name && this.review && this.rating && this.recommend) {
+        let productReview = {
+          name: this.name,
+          review: this.review,
+          rating: this.rating,
+          recommend: this.recommend
+        }
+        this.$emit('review-submitted' , productReview)
+        this.name = null
+        this.review = null
+        this.rating = null
+        this.recommend = null
+      }
+      else {
+        if (!this.name) this.errors.push('name required.')
+        if (!this.review) this.errors.push('review required.')
+        if (!this.rating) this.errors.push('rating required.')
+        if (!this.recommend) this.errors.push('recommend required.')
+      }
+    }
+  }
+
+})
 
 var app = new Vue({
   el: "#app", 
